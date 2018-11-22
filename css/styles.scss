@@ -1,0 +1,365 @@
+// ===============================================================
+// VARIABLES (utilities)
+// ===============================================================
+
+// Colors
+$white      : #fff;
+$lightGrey  : #f1f1f1;
+$grey       : #dfdfdf;
+$darkGrey   : #83898d;
+$lightBlack : #262626;
+$black      : #404a51;
+$pink       : #FC9596;
+
+// Fonts
+$font-url   : "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700";
+$font-family: "Open Sans", sans-serif;
+@font-face {
+  font-family: "mouser";
+  src: url(mouser.ttf);
+}
+
+// Font weights
+$font-weight-light    : 300;
+$font-weight-regular  : 400;
+$font-weight-medium   : 600;
+$font-weight-bold     : 700;
+
+// Breakpoints
+$breakpoint-small     : 1px;
+$breakpoint-medium    : 768px;
+$breakpoint-large     : 1024px;
+
+// ===============================================================
+// FUNCTIONS
+// ===============================================================
+
+// Make sure font variable is valid
+@if variable-exists($font-url){
+  @import url($font-url);
+}
+
+// ===============================================================
+// MIXINS
+// ===============================================================
+
+@mixin mediaquery($breakpoint){
+  @if $breakpoint == "small" {
+    @media (min-width: $breakpoint-small) and (max-width: $breakpoint-medium){
+      @content;
+    }
+  }
+  @else if $breakpoint == "medium" {
+    @media (min-width: $breakpoint-medium){
+      @content;
+    }
+  }
+  @else if $breakpoint == 'large' {
+    @media (min-width: $breakpoint-large){
+      @content;
+    }
+  }
+  @else {
+    @error "Oops! No value could be retrieved for '#{$breakpoint}'.";
+  }
+}
+
+// ===============================================================
+// Styling
+// ===============================================================
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $lightGrey;
+  font-family: $font-family;
+}
+
+.header,
+#main {
+  padding: 1em;
+  max-width: 2000px;
+  margin: auto;
+}
+
+.header {
+  background-color: $pink;
+  height: 65vh;
+  nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em;
+    a {
+      text-decoration: none;
+      color: $black;
+    }
+    p {
+      font-weight: $font-weight-regular;
+      color: $black;
+    }
+    @include mediaquery(medium){
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+
+h1, h2 {
+  color: $black;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 100px;
+  font-family: "mouser";
+  font-size: 2.5rem;
+  font-weight: $font-weight-regular;
+  text-transform: uppercase;
+  @include mediaquery(medium){
+    font-size: 4rem;
+    margin-top: 120px;
+  }
+}
+
+h2 {
+  font-weight: $font-weight-medium;
+  margin: .3em;
+}
+
+p {
+  margin: .3em;
+  color: $darkGrey;
+  font-weight: $font-weight-light;
+}
+
+hr {
+  width: 100%;
+  border: .5px solid $grey;
+  margin: 1em 0;
+}
+
+input[type="search"] {
+  font-family: $font-family;
+  font-weight: $font-weight-light;
+  color: $black;
+  padding: 1em;
+}
+
+.search {
+  outline: 0;
+  box-shadow: none!important;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $darkGrey;
+  color: $darkGrey;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 200;
+  font-style: italic;
+  margin: 0 auto;
+  padding-bottom: 0.25rem;
+  padding-top: 0.8rem;
+  width: 100%;
+  max-width: 250px;
+}
+
+#overlay {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.3);
+}
+
+#employees {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include mediaquery(medium){
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+
+.employee-card {
+  text-align: center;
+  width: 300px;
+  margin: 1em .5em;
+  padding: 1em;
+  background-color: $white;
+  border: 1px solid $grey;
+  border-radius: 8px;
+  position: relative;
+  display: block;
+  transform-style: flat;
+  transition: all 250ms ease-out;
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    transition: all 250ms ease-out;
+  }
+  &:before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &:hover {
+    border: 1px solid #fff;
+    cursor: pointer;
+    &:before {
+      box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+    }
+  }
+  @include mediaquery(medium){
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 45%;
+  }
+  h2 {
+    text-align: left;
+  }
+  p {
+    text-align: left;
+    font-size: .8em;
+  }
+  @include mediaquery(large){
+    width: 31%;
+    padding: .5em;
+  }
+}
+
+.employee-card-detailed {
+  position: relative;
+  background-color: $white;
+  text-align: center;
+  width: 300px;
+  margin-bottom: 1em;
+  padding: 1em;
+  border: 2px solid $grey;
+  border-radius: 8px;
+  .portrait {
+    margin-top: 0;
+    width: 128px;
+  }
+  &:hover .right-button,
+  &:hover .left-button {
+    display: inline;
+  }
+}
+
+.portrait {
+  border-radius: 5%;
+  width: 128px;
+  margin: 1em;
+  @include mediaquery(medium){
+    width: 100px;
+    margin-left: .1em;
+    margin-right: .5em;
+  };
+}
+
+.close-button,
+.browse-button,
+.left-button,
+.right-button {
+  margin: 0;
+  text-align: right;
+  transition: all 200ms;
+  font-size: 48px;
+  font-weight: bold;
+  color: $darkGrey;
+  cursor: pointer;
+  &:hover {
+    opacity: .8;
+  }
+}
+
+.close-button {
+  font-size: 24px;
+}
+
+.left-button {
+  display: none;
+  position: absolute;
+  top: 45%;
+  left: 10px;
+}
+
+.right-button {
+  display: none;
+  position: absolute;
+  top: 45%;
+  right: 10px;
+}
+
+// ===============================================================
+// Footer
+// ===============================================================
+
+footer {
+  li {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 10px;
+    color: rgba(white, 0.6);
+    &.social-link {
+      font-size: 1em;
+      border: 1px solid white;
+      a {
+        padding: .5em;
+      }
+      margin: 0;
+      float: left;
+      &:hover {
+        background-color: rgba(white, 0.9);
+        a {
+          color: #222;
+        }
+      }
+    }
+  }
+  a {
+    color: white;
+    display: block;
+    text-decoration: none;
+  }
+  .footer-links {
+    z-index: -1;
+    background-color: $lightBlack;
+    position: absolute;
+    width: 100%;
+    ul {
+      width: 250px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0px;
+      margin-top: 120px;
+      margin-bottom: 120px;
+    }
+    span {
+      font-size: .9em;
+      margin: 20px;
+      min-height: 20px;
+      display: inline-flex;
+      align-items: center;
+      text-align: center;
+      color: $white;
+    }
+  }
+}
