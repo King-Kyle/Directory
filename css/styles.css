@@ -31,11 +31,11 @@ body {
 }
 .header nav a {
   text-decoration: none;
-  color: #404a51;
+  color: #333;
 }
 .header nav p {
   font-weight: 400;
-  color: #404a51;
+  color: #333;
 }
 @media (min-width: 768px) {
   .header nav {
@@ -45,7 +45,7 @@ body {
 }
 
 h1, h2 {
-  color: #404a51;
+  color: #333;
   text-align: center;
 }
 
@@ -83,7 +83,7 @@ hr {
 input[type=search] {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
-  color: #404a51;
+  color: #333;
   padding: 1em;
 }
 
