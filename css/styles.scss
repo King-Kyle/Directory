@@ -85,7 +85,7 @@ body {
 }
 
 .header {
-  background-color: $pink;
+  background-color: $lightBlack;
   height: 65vh;
   nav {
     display: flex;
@@ -95,11 +95,11 @@ body {
     padding: 1em;
     a {
       text-decoration: none;
-      color: $black;
+      color: $darkGrey;
     }
     p {
       font-weight: $font-weight-regular;
-      color: $black;
+      color: $darkGrey;
     }
     @include mediaquery(medium){
       flex-direction: row;
@@ -109,7 +109,7 @@ body {
 }
 
 h1, h2 {
-  color: $black;
+  color: $darkGrey;
   text-align: center;
 }
 
